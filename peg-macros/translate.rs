@@ -356,7 +356,7 @@ fn compile_rule_export(context: &Context, rule: &Rule) -> TokenStream {
         .iter()
         .map(|param| {
             let param_name = &param.name;
-            quote!(#param_name)
+            quote!(#param_name.clone())
         })
         .collect();
 
@@ -367,6 +367,7 @@ fn compile_rule_export(context: &Context, rule: &Rule) -> TokenStream {
         grammar_lifetime_params,
         ..
     } = context;
+   
     let eof_check = if rule.no_eof {
         quote_spanned! { span => true }
     } else {
